@@ -1,12 +1,19 @@
 import { useState } from 'react';
 import Product from './Data.js'
 import { Link } from 'react-router-dom';
-import {  ShoppingBagIcon , HeartIcon } from '@heroicons/react/24/solid'
-
+import {  ShoppingBagIcon , PlusIcon , CheckIcon } from '@heroicons/react/24/solid'
 
 export default function Products() {
   const [displayedProducts] = useState(Product.slice(0, 20));
+ const [isMinus, setIsMinus] = useState({});
 
+
+   const toggleButton = (productId) => {
+    setIsMinus(prevState => ({
+      ...prevState,
+      [productId]: !prevState[productId]
+    }));
+  };
 
   return (
     <div className="">
@@ -17,9 +24,11 @@ export default function Products() {
           {displayedProducts.map((product) => {
             // Calculate the actual price for each product
             const actualPrice = product.price / (1 - product.discountPercentage / 100);
-
+            {/* TODO: to={`/products/${product.id}`} Fix This ISSUE */ }
+            const isMinusActive = isMinus[product.id];
             return (
-              <Link key={product.id} to={`/products/${product.id}`} className="group p-2 border rounded hover:bg-orange-100 hover:shadow-lg duration-500">
+              <div key={product.id} className="group p-2 border rounded  hover:shadow-lg duration-500">
+              <Link  to="*" >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                   <img
                     src={product.thumbnail}
@@ -32,20 +41,31 @@ export default function Products() {
                   <p className="mt-1 text-sm line-through  text-gray-500">${actualPrice.toFixed(2)}</p></div>
                   <p className="mt-1 text-[14px]  text-gray-900">{product.discountPercentage}% Off</p>
                 </div>
-                <p className="mt-1 text-xs font-small text-gray-500">{product.brand}</p>
+                  <p className="mt-1 text-xs font-small text-gray-500">{product.brand}</p>
+                  </Link>
                 <div className='flex justify-between items-center '>
                  <button className='bg-orange-600 flex gap-4 p-2 items-center   rounded text-white hover:bg-orange-500 sm:w-40 w-28  text-[10px] font-semibold sm:text-[1rem] sm:justify-between mt-10'><p>Add To Cart</p>
                  <ShoppingBagIcon className="h-6 w-4 sm:w-8" aria-hidden="true"/>
                   </button>
-                  <button className='mt-10 justify-center flex flex-col text-center text-orange-600 hover:text-red-600 items-center'>
+
+
+
+                  <button onClick={() => toggleButton(product.id)} className='mt-10 justify-center flex flex-col text-center text-orange-600 hover:text-red-600 items-center duration-600'>
+                  
+                   {isMinusActive  ? (
+        <CheckIcon  className="block h-6 w-6" aria-hidden="true" />
+      ) : (
+        <PlusIcon className="block h-6 w-6" aria-hidden="true" />
+      )}
                     
-                    <HeartIcon className='h-6 w-6 ' />
-                  <p className='text-xs'>Wish List</p>
+               {}
+                  
                   </button>
                   
                 </div>
                 
-              </Link>
+              
+              </div>
             );
           })}
         </div>

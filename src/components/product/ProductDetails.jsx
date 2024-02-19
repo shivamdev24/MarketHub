@@ -1,11 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import Product from './Product';
 
 export default function ProductDetails() {
   const { productId } = useParams();
   const product = Product.find(p => p.id === productId);
-
- 
+  const navigate = useNavigate ();
+  if (!product) {
+    navigate('*');
+ }
 
   // Calculate the actual price for the product
   const actualPrice = product.price / (1 - product.discountPercentage / 100);
