@@ -34,33 +34,34 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-             
+
               <div className="flex justify-center ml-8 items-center">
                 <Link to="/">
-                <img
-                  className="h-20 w-auto"
-                  src={Brand}
-                  alt="Your Company"
-                /></Link>
+                  <img className="h-20 w-auto" src={Brand} alt="Your Company" />
+                </Link>
               </div>
-                <div className="hidden  sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+              <div className="hidden  sm:ml-6 sm:block">
+                <div className="flex space-x-4">
                   <div className="flex">
-                    <input type="text" placeholder='Search....' className='p-2 w-80 rounded-l outline-none' />
-                    <button className='bg-orange-600 hover:bg-orange-500 text-white rounded-r px-4'>Submit</button>
-                  </div>
+                    <input
+                      type="text"
+                      placeholder="Search...."
+                      className="p-2 w-80 rounded-l outline-none"
+                    />
+                    <button className="bg-orange-600 hover:bg-orange-500 text-white rounded-r px-4">
+                      Submit
+                    </button>
                   </div>
                 </div>
+              </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      
+
                       <UserCircleIcon className="h-8 w-8 rounded-full text-gray-400 bg-white" />
                     </Menu.Button>
                   </div>
@@ -78,11 +79,16 @@ export default function Navbar() {
                         {({ active }) => (
                           <Link
                             to="/login"
-                            className={classNames(active ? 'bg-gray-100' : '', ' gap-x-2 px-4 py-2 text-sm text-gray-700 flex')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              " gap-x-2 px-4 py-2 text-sm text-gray-700 flex"
+                            )}
                           >
-                            <p>Sign In</p> 
-                  <ChevronRightIcon className="h-6 w-4" aria-hidden="true" />
-
+                            <p>Sign In</p>
+                            <ChevronRightIcon
+                              className="h-6 w-4"
+                              aria-hidden="true"
+                            />
                           </Link>
                         )}
                       </Menu.Item>
@@ -90,23 +96,21 @@ export default function Navbar() {
                         {({ active }) => (
                           <Link
                             to="/signup"
-                            className={classNames(active ? 'bg-gray-100' : '', 'gap-3 px-4 py-2 text-sm flex text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "gap-3 px-4 py-2 text-sm flex text-gray-700"
+                            )}
                           >
                             <p>Sign Up</p>
-                            
-                  
-                  </Link>
+                          </Link>
                         )}
                       </Menu.Item>
-                     
-                      
                     </Menu.Items>
                   </Transition>
                 </Menu>
 
-                <div className='px-4 text-orange-600'>
-                <ShoppingBagIcon className="h-6 w-6" aria-hidden="true"/>
-
+                <div className="px-4 text-orange-600">
+                  <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
                 </div>
               </div>
             </div>
@@ -119,11 +123,8 @@ export default function Navbar() {
                   key={item.name}
                   as="Link"
                   to={item.to}
-                  className={classNames(
-                    item.current ? 'bg-white text-gray-900' : 'text-gray-900 hover:text-gray-700 hover:bg-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
+                  className="text-gray-900 hover:text-gray-700 hover:bg-white',
+                    'block rounded-md px-3 py-2 text-base font-medium"
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -133,5 +134,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
